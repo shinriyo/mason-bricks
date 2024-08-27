@@ -1,3 +1,7 @@
 {
-  "@@locale": "de"
+  "@@locale": "de",
+  "example": "Beispiel Text",
+  "@example": {
+    "description": "Beispiel Beschreibung"
+  }
 }

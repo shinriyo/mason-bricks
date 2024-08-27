@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data.dart';
@@ -31,5 +34,21 @@ class {{feature_name.pascalCase()}}Providers {
   /// Controller
   static final Provider<{{feature_name.pascalCase()}}Controller> {{feature_name.camelCase()}}Controller =
       Provider((ref) => {{feature_name.pascalCase()}}Controller());
+
+  // l10n
+  /// {{feature_name.camelCase()}} Localization Provider
+  static final Provider<{{feature_name.pascalCase()}}Localizations> {{feature_name.camelCase()}}LocalizationsProvider =
+    Provider<{{feature_name.pascalCase()}}Localizations>(
+    (ref) {
+      final locale = PlatformDispatcher.instance.locale;
+      ref.state = lookup{{feature_name.pascalCase()}}Localizations(locale);
+      final observer = LocaleObserver((_) {
+      ref.state = lookupAppLocalizations(locale);
+      });
+      final binding = WidgetsBinding.instance..addObserver(observer);
+      ref.onDispose(() => binding.removeObserver(observer));
+      return ref.state;
+    },
+  );
 
 }
