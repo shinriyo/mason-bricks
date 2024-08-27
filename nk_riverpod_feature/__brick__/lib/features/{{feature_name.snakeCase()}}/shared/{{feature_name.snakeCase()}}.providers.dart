@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../l10n/{{feature_name.snakeCase()}}_localization.dart';
 import '../data.dart';
 import '../domain.dart';
+import '../l10n/{{feature_name.snakeCase()}}_localization.dart';
 import '../presentation.dart';
 
 /// {{feature_name.pascalCase()}} Feature Providers
