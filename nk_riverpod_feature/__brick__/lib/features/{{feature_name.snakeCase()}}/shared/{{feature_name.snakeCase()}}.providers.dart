@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../l10n/{{feature_name.camelCase()}}_localization.dart';
 import '../data.dart';
 import '../domain.dart';
 import '../presentation.dart';
@@ -42,8 +43,9 @@ class {{feature_name.pascalCase()}}Providers {
     (ref) {
       final locale = PlatformDispatcher.instance.locale;
       ref.state = lookup{{feature_name.pascalCase()}}Localizations(locale);
+      // TODO(generated): implement locale observer Class
       final observer = LocaleObserver((_) {
-      ref.state = lookupAppLocalizations(locale);
+        ref.state = lookup{{feature_name.pascalCase()}}Localizations(locale);
       });
       final binding = WidgetsBinding.instance..addObserver(observer);
       ref.onDispose(() => binding.removeObserver(observer));
@@ -51,4 +53,21 @@ class {{feature_name.pascalCase()}}Providers {
     },
   );
 
+}
+
+// LocaleObserver example implementation
+//
+// import 'package:flutter/widgets.dart';
+//
+// /// Localization Observer
+// class LocaleObserver extends WidgetsBindingObserver {
+// /// Default Constructor
+// LocaleObserver(this._didChangeLocales);
+//
+//   final void Function(List<Locale>? locales) _didChangeLocales;
+//
+//   @override
+//   void didChangeLocales(List<Locale>? locales) {
+//     _didChangeLocales(locales);
+//   }
 }
