@@ -70,4 +70,4 @@ class {{feature_name.pascalCase()}}Providers {
 //   void didChangeLocales(List<Locale>? locales) {
 //     _didChangeLocales(locales);
 //   }
-}
+//}
