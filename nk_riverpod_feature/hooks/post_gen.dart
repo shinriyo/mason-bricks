@@ -5,8 +5,8 @@ import 'package:mason/mason.dart';
 Future<void> run(HookContext context) async {
   final progress = context.logger.progress('Installing packages');
 
-  context.vars.entries.forEach(
-      (entry) => context.logger.info('vars... ${entry.key}: ${entry.value}'));
+  // context.vars.entries.forEach(
+  //     (entry) => context.logger.info('vars... ${entry.key}: ${entry.value}'));
   // Run `flutter packages get` after generation.
   await Process.run('flutter', ['packages', 'get']);
   progress.complete();
