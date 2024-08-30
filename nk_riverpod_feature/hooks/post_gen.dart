@@ -3,19 +3,21 @@ import 'dart:io';
 import 'package:mason/mason.dart';
 
 Future<void> run(HookContext context) async {
-  final progress = context.logger.progress('Installing packages');
+  // final progress = context.logger.progress('Installing packages');
+  //
+  // // context.vars.entries.forEach(
+  // //     (entry) => context.logger.info('vars... ${entry.key}: ${entry.value}'));
+  // // Run `flutter packages get` after generation.
+  // await Process.run('flutter', ['packages', 'get']);
+  // progress.complete();
 
-  // context.vars.entries.forEach(
-  //     (entry) => context.logger.info('vars... ${entry.key}: ${entry.value}'));
-  // Run `flutter packages get` after generation.
-  await Process.run('flutter', ['packages', 'get']);
-  progress.complete();
-
+  final featureName = context.vars['feature_name'];
   final makefileService = _MakefileService();
   await makefileService.ensureMakefile();
-  await makefileService.addLocalization(context.vars['feature_name']);
+  await makefileService.addLocalization(featureName);
 
-  final makeProgress = context.logger.progress('Generate Locale');
+  final makeProgress =
+      context.logger.progress('Generate Locale for Feature $featureName');
   await Process.run('make', ['l10n-gen']);
   makeProgress.complete();
 }
